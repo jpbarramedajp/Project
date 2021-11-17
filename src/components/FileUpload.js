@@ -24,7 +24,7 @@ export const FileUpload = (props) => {
         formData.append("fileName", fileName);
         formData.append("folder", props.path);
     try{
-        const res = await axios.post("https://localhost:44315/api/file",formData);
+        const res = await axios.post("https://additionhillsapi.herokuapp.com/file",formData);
         resetList();
     }catch(ex){
         console.log(ex)

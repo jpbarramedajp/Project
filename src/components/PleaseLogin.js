@@ -16,7 +16,7 @@ function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
-      <Link color="inherit" href="http://localhost:3000/">
+      <Link color="inherit" href="https://additionhills.herokuapp.com/">
         Barangay Addition Hills
       </Link>{' '}
       {new Date().getFullYear()}
@@ -63,7 +63,7 @@ export default function PleaseLogin() {
           <Typography align="center" component="h1" variant="h5">
             You are not currently signed in as admin. Please log in to view this section.
           <div>
-          <Link href="http://localhost:3000/">
+          <Link href="https://additionhills.herokuapp.com/">
             Click here to Log in
           </Link>
           </div>
