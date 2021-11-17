@@ -9,7 +9,7 @@ import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 
 export const links = [
         {
-        name: 'Home,',
+        name: 'Home',
         icon: HomeIcon,
         route: '/Home/',
         },
