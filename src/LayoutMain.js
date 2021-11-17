@@ -157,7 +157,6 @@ const useStyles = makeStyles((theme) => ({
     const location = useLocation();
     const history = useHistory();
     const logout = () => {
-      alert("test")
       setSignedin(false);
       history.push("/")
     }
