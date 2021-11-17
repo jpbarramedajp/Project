@@ -24,7 +24,6 @@ export default function Welcome() {
   const [isOpen, setIsOpen] = useState(true);
   
   const {announcement, user, doNotOpen, setDoNotOpen} = useContext(DashBoardContext);
-
   const handleClose = () => {
     setIsOpen(false)
     setDoNotOpen(true)
@@ -49,7 +48,7 @@ export default function Welcome() {
             </DialogContent>
             <DialogActions>
               <Button onClick={handleClose} autoFocus>
-                Okay
+                Confirm
               </Button>
             </DialogActions>
           </Dialog>

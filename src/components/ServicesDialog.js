@@ -7,7 +7,7 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 
 export default function SuccessRegister(props) {
- const [open, setOpen] = React.useState(props.open);
+ const [open, setOpen] = React.useState(false);
   
   const handleClose = () => {
     setOpen(false);
@@ -30,12 +30,12 @@ export default function SuccessRegister(props) {
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            You have successfully completed the registration. Click okay to login.
+            You have successfully completed the registration. Click confirm to login.
           </DialogContentText>
         </DialogContent>
         <DialogActions>
           <Button onClick={() => handleClose()} autoFocus>
-            Okay
+            Confirm
           </Button>
         </DialogActions>
       </Dialog>

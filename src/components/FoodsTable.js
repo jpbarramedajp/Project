@@ -214,12 +214,12 @@ export default function CustomPaginationActionsTable() {
             </DialogTitle>
             <DialogContent>
               <DialogContentText id="alert-dialog-description">
-                Click okay to proceed.
+                Click Confirm to proceed.
               </DialogContentText>
             </DialogContent>
             <DialogActions>
               <Button onClick={() => handleDeleteItem('delete', deleteitem)} autoFocus>
-                Okay
+                Confirm
               </Button>
             </DialogActions>
           </Dialog>
@@ -310,7 +310,7 @@ export default function CustomPaginationActionsTable() {
             </DialogContent>
             <DialogActions>
               <Button onClick={() => handleSaveItem('insert')} autoFocus>
-                Okay
+                Confirm
               </Button>
             </DialogActions>
           </Dialog>
