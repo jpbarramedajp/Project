@@ -152,10 +152,16 @@ const useStyles = makeStyles((theme) => ({
     const classes = useStyles();
     const theme = useTheme();
     const { drawerOpen: open, setDrawerOpen } = useLayoutContext();
-    const {signedIn} = useContext(DashBoardContext);
+    const {signedIn, setSignedin} = useContext(DashBoardContext);
     const disp = signedIn? "" : "none";
     const location = useLocation();
     const history = useHistory();
+    const logout = () => {
+      alert("test")
+      setSignedin(false);
+      history.push("/")
+    }
+
     const gotoRoute = (route) => {
       history.push(route);
     };
@@ -210,11 +216,12 @@ const useStyles = makeStyles((theme) => ({
           </List>
             <List>
               <ListItem button 
+               onClick={() => {logout()}}
               >
                 <ListItemIcon>
                   <ExitToApp />
                 </ListItemIcon>
-                <ListItemText primary="Logout" />
+                <ListItemText primary="Logout"/>
               </ListItem>
             </List>
         </Box>
