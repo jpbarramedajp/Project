@@ -62,12 +62,12 @@ export default function SignUp() {
   const [UserName, setUserName] = useState();
   const [password, setpassword] = useState();
   const [reg, setreg] = useState([]);
-  const [region, setRegion] = useState('01');
+  const [region, setRegion] = useState("");
   const [provinceList, setprovinceList] = useState([]);
-  const [province, setprovince] = useState('0128');
+  const [province, setprovince] = useState("");
   const [cityList, setcityList] = useState([]);
-  const [city, setcity] = useState('012801');
-  const [brgy, setbrgy] = useState("012801001");
+  const [city, setcity] = useState("");
+  const [brgy, setbrgy] = useState("");
   const [brgyList, setbrgyList] = useState([]);
   const [houseNo, setHouseNo] = useState('');
   const [registered, setRegistered] = useState(false);
@@ -274,6 +274,7 @@ export default function SignUp() {
                     id: 'outlined-region-native-simple',
                 }}
                 >
+                  <option value={""}>{""}</option>
                 {
                   regionList.map((reg) => {
                     return <option value={reg.region_code}>{reg.region_name}</option>
@@ -296,6 +297,7 @@ export default function SignUp() {
                     id: 'outlined-Province-native-simple',
                 }}
                 >
+                  <option value={""}>{""}</option>
                 {
                   provinceList.map((prov) => {
                     return <option value={prov.province_code}>{prov.province_name}</option>
@@ -318,7 +320,9 @@ export default function SignUp() {
                     id: 'outlined-City-native-simple',
                 }}
                 >
+                  <option value={""}>{""}</option>
                 {
+                  
                   cityList.map((city) => {
                     return <option value={city.city_code}>{city.city_name}</option>
                   })
@@ -341,6 +345,7 @@ export default function SignUp() {
                     id: 'outlined-Barangay-native-simple',
                 }}
                 >
+                  <option value={""}>{""}</option>
                 {
                   brgyList.map((brgy) => {
                     return <option value={brgy.brgy_code}>{brgy.brgy_name}</option>
