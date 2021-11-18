@@ -115,6 +115,7 @@ const useStyles = makeStyles((theme) => ({
     const { drawerOpen: open, setDrawerOpen } = useLayoutContext();
 
     const {signedIn} = useContext(DashBoardContext);
+
     const disp = signedIn? "" : "none";
     
     return (
@@ -152,13 +153,14 @@ const useStyles = makeStyles((theme) => ({
     const classes = useStyles();
     const theme = useTheme();
     const { drawerOpen: open, setDrawerOpen } = useLayoutContext();
-    const {signedIn, setSignedin} = useContext(DashBoardContext);
+    const {signedIn, setSignedin, setOut} = useContext(DashBoardContext);
     const disp = signedIn? "" : "none";
     const location = useLocation();
     const history = useHistory();
     const logout = () => {
-      setSignedin(false);
       history.push("/")
+      setOut(true);
+      setSignedin(false);
     }
 
     const gotoRoute = (route) => {

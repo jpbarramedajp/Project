@@ -22,6 +22,7 @@ const DashBoardContextProvider = props => {
   const [foodsmed, setfoodsmed] = useState([]);
   const [folders, setFolders] = useState([]);
   const [services, setServices] = useState([]);
+  const [out, setOut] = useState(true);
   useMemo(() => {
     regions().then((region) => setRegionList(region));
   },[]);
@@ -44,10 +45,12 @@ const DashBoardContextProvider = props => {
   }, []);
 
   useEffect(async () => {
+    setLoading(true);
     await setAnnouncement(await GetAnnouncement());
     await setfoodsmed(await GetFoodsandMedicines());
     await setProfiles(await GetProfiles());
     await setServices(await GetServices());
+    setLoading(false);
   }, []);
 
   
@@ -84,7 +87,9 @@ const DashBoardContextProvider = props => {
         "setFolders": setFolders,
         "folders": folders,
         "services": services,
-        "setServices": setServices
+        "setServices": setServices,
+        "out": out,
+        "setOut": setOut
       }}
     >
       {props.children}

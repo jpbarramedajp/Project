@@ -23,7 +23,7 @@ export default function Welcome() {
   const classes = useStyles();
   const [isOpen, setIsOpen] = useState(true);
   
-  const {announcement, user, doNotOpen, setDoNotOpen} = useContext(DashBoardContext);
+  const {announcement, user, doNotOpen, setDoNotOpen, loading} = useContext(DashBoardContext);
   const handleClose = () => {
     setIsOpen(false)
     setDoNotOpen(true)
@@ -58,7 +58,7 @@ export default function Welcome() {
         <marquee direction="left" height="100%" width="100%" >
           <div  style={{width: "100%"}}>
           <Typography align="center" component="h1" variant="h5" >
-            {announcement[0].announcement}
+            {!loading? announcement[0].announcement : "Loading Announcement"}
           </Typography> 
           </div>
         </marquee>
@@ -238,12 +238,6 @@ export default function Welcome() {
           </marquee>
           </div>
         </Grid>
-        {/* <Grid item >
-          <MediaCard image={seal} title={"MandaVax"} description={"Reserve your slots and Pre-Register now"} link="https://mandavax.mandaluyong.gov.ph/Mandaluyong/manda-vaccine/"/>
-        </Grid>
-        <Grid item>
-          <MediaCard image={mandatrack} title={"MandaTrack"} description={"MandaTrack is Mandaluyong City's QR Code contact tracing solution. For Support, email mandatrack@mandaluyong.gov.ph"} link="https://mandatrack.appcase.net/"/>
-        </Grid> */}
       </Grid>
       </Grid>
   );

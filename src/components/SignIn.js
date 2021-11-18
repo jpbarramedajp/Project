@@ -51,11 +51,10 @@ const useStyles = makeStyles((theme) => ({
 export default function SignIn() {
   const classes = useStyles();
 
-  const {loading, signedIn, setSignedin, setIsAdmin, setUser,isAdmin} = useContext(DashBoardContext);
+  const {loading, signedIn, setSignedin, setIsAdmin, setUser,isAdmin, out, setOut} = useContext(DashBoardContext);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [isOpen, setIsOpen] = useState(false);
-
   const handleSubmit =async (event) => {
     if(username == "admin" && password == "admin"){
       setIsAdmin(true);
@@ -63,9 +62,7 @@ export default function SignIn() {
     }
     else{
       setSignedin(await login(username, password));
-      if(!signedIn){
-        setIsOpen(true);
-      }
+      setOut(false);
     }
   }
 
@@ -83,6 +80,16 @@ export default function SignIn() {
     }
   }, [signedIn])
 
+  useEffect(() => {
+    if(!signedIn){
+      if(out){
+        setIsOpen(false)
+      }
+      else{
+        setIsOpen(true)
+      }
+    }
+  },[signedIn, out])
  
 
   return (
@@ -163,7 +170,7 @@ export default function SignIn() {
             </DialogContent>
             <DialogActions>
               <Button onClick={handleClose} autoFocus>
-                Okay
+                Confirm
               </Button>
             </DialogActions>
           </Dialog>
