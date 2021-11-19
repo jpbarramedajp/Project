@@ -16,6 +16,7 @@ import { useHistory } from 'react-router-dom';
 import {regions, provinces, cities, barangays} from 'select-philippines-address';
 import {DashBoardContext} from '../helpers/Context';
 import SuccessRegister from './SuccessRegister';
+import Seal from '../assets/logo.gif';
 
 function Copyright() {
   return (
@@ -56,7 +57,7 @@ export default function SignUp() {
   const [FirstName, setFirstName] = useState();
   const [MiddleName, setMiddleName] = useState('');
   const [LastName, setLastName] = useState();
-  const [Gender, setGender] = useState();
+  const [Gender, setGender] = useState('Male');
   const [Birthdate, setBirthdate] = useState();
   const [Age, setAge] = useState();
   const [UserName, setUserName] = useState();
@@ -73,6 +74,7 @@ export default function SignUp() {
   const [registered, setRegistered] = useState(false);
   const [error, setError] = useState(false);
   const [field, setField] = useState(false);
+  const [email, setEmail] = useState();
   const history = useHistory();
 
   const handlePopUp = () => {
@@ -102,12 +104,24 @@ export default function SignUp() {
     })
 
   
-    if(!FirstName){
+    function hasNumber(myString) {
+      return /\d/.test(myString);
+    }
+
+    if(!FirstName || hasNumber(FirstName)){
       setField("First Name")
       setError(true)
     }
-    else if(!LastName){
+    else if(!LastName || hasNumber(LastName)){
       setField("Last Name")
+      setError(true)
+    }
+    if(!email){
+      setField("Email")
+      setError(true)
+    }
+    else if(hasNumber(MiddleName)){
+      setField("Middle Name")
       setError(true)
     }
     else if(!Age){
@@ -131,7 +145,7 @@ export default function SignUp() {
       setError(true)
     }
     else{
-     await setreg(await Register(FirstName, MiddleName, LastName, Age, Gender, Birthdate, houseNo + a[0].brgy_name + ", " + b[0].city_name + ", " + c[0].province_name + ', ' + d[0].region_name, UserName, password));
+     await setreg(await Register(FirstName, MiddleName, LastName, email,  Age, Gender, Birthdate, houseNo + a[0].brgy_name + ", " + b[0].city_name + ", " + c[0].province_name + ', ' + d[0].region_name, UserName, password));
     }
    
   }
@@ -155,6 +169,29 @@ export default function SignUp() {
   const handleClose = () => {
     setError(false)
   }
+
+  const handleBdaySelect = (e) => {
+    setBirthdate(e.target.value);
+    setAge(getAge(e.target.value));
+  }
+
+  function getAge(dateString) {
+    var today = new Date();
+    var birthDate = new Date(dateString);
+    var age = today.getFullYear() - birthDate.getFullYear();
+    var m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+    }
+    return age;
+  }
+
+  function getMax() {
+    var today = new Date();
+    return today.getFullYear();
+  }
+
+
 
   return (
     <Container component="main" maxWidth="sm">
@@ -182,9 +219,7 @@ export default function SignUp() {
         </div>
       <CssBaseline />
       <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
-        </Avatar>
+        <img src={Seal}/>
         <Typography component="h1" variant="h5">
           Sign up
         </Typography>
@@ -208,7 +243,6 @@ export default function SignUp() {
                 autoComplete="Mname"
                 name="Middle Name"
                 variant="outlined"
-                required
                 fullWidth
                 id="MiddleName"
                 label="Middle Name"
@@ -228,16 +262,45 @@ export default function SignUp() {
                 onInput={ e=>setLastName(e.target.value)}
               />
             </Grid>
-            <Grid item sm={6}>
+            <Grid item sm={12}>
               <TextField
                 variant="outlined"
                 required
                 fullWidth
+                id="Email"
+                label="Email"
+                name="Email"
+                autoComplete="Email"
+                onInput={ e=>setEmail(e.target.value)}
+              />
+            </Grid>
+            <Grid item sm={12}>
+            <TextField
+                variant="outlined"
+                id="date"
+                label="Birthday"
+                type="date"
+                defaultValue=""
+                className={classes.textField}
+                InputLabelProps={{
+                shrink: true,
+                }}
+                inputProps={{min: "2019-01-24", max: "2020-05-31"}}
+                onInput={(e) => handleBdaySelect(e)}
+            />
+            </Grid>
+            <Grid item sm={12}>
+                
+            <Typography>&nbsp;{"Age"}</Typography>
+            </Grid>
+            <Grid item sm={6}>
+              <TextField
+                variant="outlined"
+                value={Age}
+                fullWidth
                 id="Age"
-                label="Age"
                 name="Age"
-                autoComplete="Age"
-                onInput={ e=>setAge(e.target.value)}
+                disabled
               />
             </Grid>
             <Grid item xs={12} sm={12}>
@@ -365,20 +428,7 @@ export default function SignUp() {
                 onInput={ e=>setHouseNo(e.target.value + ', ')}
               />
             </Grid>
-            <Grid item sm={12}>
-            <TextField
-                variant="outlined"
-                id="date"
-                label="Birthday"
-                type="date"
-                defaultValue=""
-                className={classes.textField}
-                InputLabelProps={{
-                shrink: true,
-                }}
-                onInput={ e=>setBirthdate(e.target.value)}
-            />
-            </Grid>
+
             <Grid item sm={12}>
               <TextField
                 variant="outlined"

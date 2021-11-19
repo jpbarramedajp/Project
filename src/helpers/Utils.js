@@ -56,7 +56,7 @@ const GetProfiles = async () => {
     return body;
 }
 
-const Register = async (FirstName, MiddleName, LastName, Age,
+const Register = async (FirstName, MiddleName, LastName,email, Age,
     Gender, Birthdate, Address, UserName, password) => {
     const response = await fetch(`${BASE_URL_API}api/RegisterController1`,
     {
@@ -67,6 +67,7 @@ const Register = async (FirstName, MiddleName, LastName, Age,
             'FirstName': FirstName,
             'MiddleName' : MiddleName,
             'LastName' : LastName,
+            'email' : email,
             'Age' : Age,
             'Gender' : Gender,
             'Birthdate' : Birthdate,

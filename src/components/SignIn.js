@@ -14,6 +14,7 @@ import {DashBoardContext} from '../helpers/Context';
 import {login} from '../helpers/Utils';
 import Welcome from './Welcome';
 import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@material-ui/core';
+import Seal from '../assets/seal.png';
 
 function Copyright() {
   return (
@@ -93,14 +94,15 @@ export default function SignIn() {
  
 
   return (
-    <div>
+    <div > {/*style={{backgroundImage: `url(${Seal})`}}*/}
       {signedIn? <Welcome/> :
         <Container component="main" maxWidth="xs">
         <CssBaseline />
         <div className={classes.paper}>
-          <Avatar className={classes.avatar}>
+          <img src={Seal}/>
+          {/* <Avatar className={classes.avatar}>
             <LockOutlinedIcon />
-          </Avatar>
+          </Avatar> */}
           <Typography component="h1" variant="h5">
             {loading}
           </Typography>

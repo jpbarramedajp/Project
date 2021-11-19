@@ -54,8 +54,8 @@ export default function Welcome() {
           </Dialog>
         </div>
 
-      <Grid container item  xs={12} style={{backgroundColor: "red"}}>
-        <marquee direction="left" height="100%" width="100%" >
+      <Grid container item  xs={12}>
+        <marquee direction="left" height="100%" width="100%" scrollamount="15">
           <div  style={{width: "100%"}}>
           <Typography align="center" component="h1" variant="h5" >
             {!loading? announcement[0].announcement : "Loading Announcement"}
