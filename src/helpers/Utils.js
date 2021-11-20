@@ -232,6 +232,37 @@ const GetServices = async () => {
     return body;
 }
 
+const GetRequests = async () => {
+    const response = await fetch(`${BASE_URL_API}api/Request`,
+    {
+        method: 'GET',
+        mode: 'cors',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        redirect: 'follow'
+    });
+    const body = await response.json();
+    return body;
+}
+
+const SetRequests = async (requestor, medicine, reason) => {
+    const response = await fetch(`${BASE_URL_API}api/Request`,
+    {
+        method: 'POST',
+        mode: 'cors',
+        headers: {
+            'Content-Type': 'application/json',
+            'requestor': requestor,
+            'medicine': medicine,
+            'reason': reason
+        },
+        redirect: 'follow'
+    });
+    const body = await response.json();
+    return body;
+}
+
 const ServicesMethods = async (id, title, subtitle, desc, image) => {
     const response = await fetch(`${BASE_URL_API}api/services`,
     {
@@ -251,6 +282,7 @@ const ServicesMethods = async (id, title, subtitle, desc, image) => {
     return body;
 }
 
+
 export {
-    login, Register, GetReviews, GetLikes, GetAnnouncement, SetAnnouncement, GetProfiles, GetFoodsandMedicines, SetFoodsAndMedicines, GetFoldersList, Download, GetServices, ServicesMethods
+    login, Register, GetReviews, GetLikes, GetAnnouncement, SetAnnouncement, GetProfiles, GetFoodsandMedicines, SetFoodsAndMedicines, GetFoldersList, Download, GetServices, ServicesMethods, GetRequests, SetRequests
 };

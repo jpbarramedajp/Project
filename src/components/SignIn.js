@@ -73,6 +73,7 @@ export default function SignIn() {
 
   useEffect(() => {
     var profile = JSON.parse(signedIn);
+    console.log(profile)
     if(isAdmin){
       setUser({firstName: "Admin", userName: "admin"});
     }

@@ -16,7 +16,7 @@ import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import LastPageIcon from '@material-ui/icons/LastPage';
 import {DashBoardContext} from '../helpers/Context';
-import { TextField } from '@material-ui/core';
+import { TextField, Typography } from '@material-ui/core';
 const useStyles1 = makeStyles((theme) => ({
   root: {
     flexShrink: 0,
@@ -97,28 +97,12 @@ export default function CustomPaginationActionsTable() {
   const classes = useStyles2();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
-  const {profiles} = useContext(DashBoardContext);
+  const {profiles,request} = useContext(DashBoardContext);
   //const {sort, setSort} = React.useState('asc');
   const [searched, setSearched] = React.useState()
   //let rows = profiles.sort((a, b) => a.lastName.localeCompare(b.lastName));
-  const [rows, setRows] = React.useState(profiles.sort((a, b) => a.lastName.localeCompare(b.lastName)))
-
-  
-  const filter = () => {
-      if(searched){
-        return profiles.filter((profile) => {
-          return profile.lastName.toLowerCase().includes(searched.toLowerCase()) || profile.age.toString() === searched.toLowerCase()
-      })
-    }
-    else{
-      return profiles.sort((a, b) => a.lastName.localeCompare(b.lastName));
-    }
-  }
- 
-  useMemo(() => {
-    console.log(filter())
-    setRows(filter());
-  }, [searched])
+  const [rows, setRows] = React.useState(request)
+  console.log(request)
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -131,38 +115,23 @@ export default function CustomPaginationActionsTable() {
 
   return (
     <div>
-    <TextField
-                name="Search"
-                variant="outlined"
-                required
-                id="Search"
-                label="Search"
-                onChange={ e=>setSearched(e.target.value)}
-                autoFocus
-     />
-     <div>&nbsp;</div>
+        <div>&nbsp;</div>
+        <Typography component="h1" variant="h5">
+          Medicine Requests List
+        </Typography>
     <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="custom pagination table">
       <TableHead style={{backgroundColor: "gray"}}>
             <TableRow>
                 <TableCell align="left">
-                    Last Name
+                   Requestor
                 </TableCell>
                 <TableCell align="left">
-                    First Name
+                    Medicine
                 </TableCell>
                 <TableCell align="left">
-                    Middle Name
+                    Reason
                 </TableCell> 
-                <TableCell align="left">
-                    Age
-                </TableCell>
-                <TableCell align="left">
-                    Birthday
-                </TableCell>
-                <TableCell align="center" colSpan={8}>
-                    Address
-                </TableCell>
             </TableRow>
           </TableHead>
         <TableBody>
@@ -170,27 +139,15 @@ export default function CustomPaginationActionsTable() {
             ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
             : rows
           ).map((row) => (
-            <TableRow key={row.firstName}>
+            <TableRow key={row.Id}>
               <TableCell scope="row">
-                {row.lastName}
+                {row.requestor}
               </TableCell>
               <TableCell  align="left">
-                {row.firstName}
+                {row.medicine}
               </TableCell>
               <TableCell  align="left">
-                {row.middleName}
-              </TableCell>
-              <TableCell align="left">
-                {row.age}
-              </TableCell>
-              <TableCell align="left">
-                {row.birthdate}
-              </TableCell>
-              <TableCell align="left">
-                {row.birthday}
-              </TableCell>
-              <TableCell  align="left">
-                {row.address}
+                {row.reason}
               </TableCell>
             </TableRow>
           ))}

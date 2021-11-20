@@ -15,6 +15,7 @@ import { Divider, TextField, Dialog, DialogTitle, DialogActions, DialogContent, 
 import { Button } from '@material-ui/core';
 import { SetAnnouncement, GetAnnouncement, ServicesMethods, GetServices } from '../helpers/Utils';
 import ProfileTable from './ProfileTable';
+import RequestTable from './RequestTable';
 import Directories from './Directories';
 import Chart from './Chart';
 
@@ -32,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Documents() {
     const classes = useStyles();
-    const {isAdmin,signedIn,setAnnouncement, services, setServices, likes} = useContext(DashBoardContext);
+    const {isAdmin,signedIn,setAnnouncement, services, setServices, likes, request} = useContext(DashBoardContext);
     const [a, setA] = useState([]);
     const [announcement, setAnnouncementState] = useState('');
     const [open, setOpen] = useState(false);
@@ -140,6 +141,7 @@ export default function Documents() {
           {"List of Residents"}
           </Typography>
           <ProfileTable />
+          <RequestTable />
           <div>
           <Dialog
             open={open}

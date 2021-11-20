@@ -18,6 +18,9 @@ import {DashBoardContext} from '../helpers/Context';
 import SuccessRegister from './SuccessRegister';
 import Seal from '../assets/logo.gif';
 
+import DateFnsUtils from '@date-io/date-fns';
+import { KeyboardDatePicker, MuiPickersUtilsProvider  } from '@material-ui/pickers';
+
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
@@ -58,7 +61,7 @@ export default function SignUp() {
   const [MiddleName, setMiddleName] = useState('');
   const [LastName, setLastName] = useState();
   const [Gender, setGender] = useState('Male');
-  const [Birthdate, setBirthdate] = useState();
+  const [Birthdate, setBirthdate] = useState(new Date());
   const [Age, setAge] = useState();
   const [UserName, setUserName] = useState();
   const [password, setpassword] = useState();
@@ -116,7 +119,7 @@ export default function SignUp() {
       setField("Last Name")
       setError(true)
     }
-    if(!email){
+    else if(!email){
       setField("Email")
       setError(true)
     }
@@ -125,7 +128,7 @@ export default function SignUp() {
       setError(true)
     }
     else if(!Age){
-      setField("Age")
+      setField("Birthday, Age is below 1 yr old.")
       setError(true)
     }
     else if(!houseNo){
@@ -170,10 +173,16 @@ export default function SignUp() {
     setError(false)
   }
 
-  const handleBdaySelect = (e) => {
-    setBirthdate(e.target.value);
-    setAge(getAge(e.target.value));
-  }
+  // const handleBdaySelect = (e) => {
+
+  //   console.log(Birthdate)
+  //   setBirthdate();
+  //   //setAge(getAge(e.target.value));
+  // }
+
+  useMemo(() => {
+    setAge(getAge(Birthdate));
+  },[Birthdate])
 
   function getAge(dateString) {
     var today = new Date();
@@ -187,7 +196,7 @@ export default function SignUp() {
   }
 
   function getMax() {
-    var today = new Date();
+      var today = new Date();
     return today.getFullYear();
   }
 
@@ -275,7 +284,7 @@ export default function SignUp() {
               />
             </Grid>
             <Grid item sm={12}>
-            <TextField
+            {/* <TextField
                 variant="outlined"
                 id="date"
                 label="Birthday"
@@ -283,14 +292,26 @@ export default function SignUp() {
                 defaultValue=""
                 className={classes.textField}
                 InputLabelProps={{
-                shrink: true,
+                  shrink: true,
                 }}
-                inputProps={{min: "2019-01-24", max: "2020-05-31"}}
                 onInput={(e) => handleBdaySelect(e)}
+                /> */}
+
+            <MuiPickersUtilsProvider utils={DateFnsUtils}>
+            <KeyboardDatePicker 
+              size="small"
+              variant="inline" 
+              inputVariant="outlined"
+              label="Date Picker"
+              name="datePicker"
+              format="MMM/dd/yyyy"
+              onChange={setBirthdate}
+              value={Birthdate}
+              maxDate={new Date()}
             />
+          </MuiPickersUtilsProvider>
             </Grid>
             <Grid item sm={12}>
-                
             <Typography>&nbsp;{"Age"}</Typography>
             </Grid>
             <Grid item sm={6}>

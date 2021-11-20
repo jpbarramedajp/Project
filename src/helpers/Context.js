@@ -1,6 +1,6 @@
 
 import React, { useState, createContext, useMemo, useEffect } from 'react';
-import { GetReviews, GetLikes, GetAnnouncement, GetProfiles, GetFoodsandMedicines, GetFoldersList, GetServices } from './Utils';
+import { GetReviews, GetLikes, GetAnnouncement, GetProfiles, GetFoodsandMedicines, GetFoldersList, GetServices, GetRequests } from './Utils';
 import {regions} from 'select-philippines-address';
 import {serviceList} from '../helpers/Constants';
 export const DashBoardContext = createContext();
@@ -18,6 +18,7 @@ const DashBoardContextProvider = props => {
   const [isFileReady, setIsFileReady] = useState(false);
   const [announcement, setAnnouncement] = useState();
   const [profiles, setProfiles] = useState();
+  const [request, setRequest] = useState([]);
   const [doNotOpen, setDoNotOpen] = useState(false);
   const [foodsmed, setfoodsmed] = useState([]);
   const [folders, setFolders] = useState([]);
@@ -50,6 +51,7 @@ const DashBoardContextProvider = props => {
     await setfoodsmed(await GetFoodsandMedicines());
     await setProfiles(await GetProfiles());
     await setServices(await GetServices());
+    await setRequest(await GetRequests())
     setLoading(false);
   }, []);
 
@@ -89,7 +91,9 @@ const DashBoardContextProvider = props => {
         "services": services,
         "setServices": setServices,
         "out": out,
-        "setOut": setOut
+        "setOut": setOut,
+        "request": request,
+        "setRequest": setRequest
       }}
     >
       {props.children}
